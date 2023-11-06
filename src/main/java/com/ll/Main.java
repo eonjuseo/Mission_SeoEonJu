@@ -33,6 +33,7 @@ public class Main {
                     quoteNum++;
                     System.out.println(quoteNum -1 + "번 명언이 등록되었습니다.");
                     break;
+
                 case "삭제":
                     System.out.print("?id=");
                     int delNum = Integer.parseInt(sc.readLine());
@@ -49,6 +50,7 @@ public class Main {
                         System.out.println(delNum + "번 명언은 존재하지 않습니다.");
                     }
                     break;
+
                 case "목록":
                     System.out.println("번호 / 작가 / 명언");
                     System.out.println("----------------------");
@@ -56,6 +58,7 @@ public class Main {
                         System.out.println(quoteRead.getQuoteNum() + " / " + quoteRead.getWriter() + " / " + quoteRead.getQuote());
                     }
                     break;
+                    
                 case "종료":
                     return;
 
