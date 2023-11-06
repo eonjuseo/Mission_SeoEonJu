@@ -10,7 +10,10 @@ public class Main {
 
         System.out.println("== 명언 앱 ==");
 
+        int quoteNum = 1;
+
         BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));
+
         while (true) {
             System.out.print("명령) ");
             String command = sc.readLine();
@@ -22,6 +25,7 @@ public class Main {
                     String quote = sc.readLine();
                     System.out.print("작가 : ");
                     String writer = sc.readLine();
+                    System.out.println(quoteNum + "번 명언이 등록되었습니다.");
                     break;
 
 
