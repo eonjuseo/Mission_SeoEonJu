@@ -17,9 +17,17 @@ public class Main {
 
             switch (command) {
 
+                case "등록":
+                    System.out.print("명언 : ");
+                    String quote = sc.readLine();
+                    System.out.print("작가 : ");
+                    String writer = sc.readLine();
+                    break;
+
+
                 case "종료":
                     return;
-                    
+
 
             }
 
