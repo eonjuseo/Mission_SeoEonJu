@@ -31,9 +31,24 @@ public class Main {
                     Quote quoteCreate = new Quote(quoteNum, quote, writer);
                     quoteList.add(0, quoteCreate);
                     quoteNum++;
-                    System.out.println(quoteNum + "번 명언이 등록되었습니다.");
+                    System.out.println(quoteNum -1 + "번 명언이 등록되었습니다.");
                     break;
-
+                case "삭제":
+                    System.out.print("?id=");
+                    int delNum = Integer.parseInt(sc.readLine());
+                    boolean delete = false;
+                    for (int i = 0; i < quoteList.size(); i++) {
+                        if (quoteList.get(i).getQuoteNum() == delNum) {
+                            quoteList.remove(i);
+                            delete = true;
+                            System.out.println(delNum + "번 명언이 삭제되었습니다.");
+                            break;
+                        }
+                    }
+                    if (!delete) {
+                        System.out.println(delNum + "번 명언은 존재하지 않습니다.");
+                    }
+                    break;
                 case "목록":
                     System.out.println("번호 / 작가 / 명언");
                     System.out.println("----------------------");
