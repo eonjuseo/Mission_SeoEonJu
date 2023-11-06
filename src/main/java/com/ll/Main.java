@@ -34,6 +34,34 @@ public class Main {
                     System.out.println(quoteNum -1 + "번 명언이 등록되었습니다.");
                     break;
 
+                case "수정":
+                    System.out.print("?id=");
+                    int modNum = Integer.parseInt(sc.readLine());
+                    boolean update = false;
+                    for (int i = 0; i < quoteList.size(); i++) {
+                        if (quoteList.get(i).getQuoteNum() == modNum) {
+                            System.out.println("명언(기존) : " + quoteList.get(i).getQuote());
+                            System.out.print("명언 : ");
+                            String newQuote = sc.readLine();
+                            if (!newQuote.isEmpty()) {
+                                quoteList.get(i).setQuote(newQuote);
+                            }
+                            System.out.println("작가(기존) : " + quoteList.get(i).getWriter());
+                            System.out.print("작가 : ");
+                            String newWriter = sc.readLine();
+                            if (!newWriter.isEmpty()) {
+                                quoteList.get(i).setWriter(newWriter);
+                            }
+                            update = true;
+                            System.out.println(modNum + "번 명언이 수정되었습니다.");
+                            break;
+                        }
+                    }
+                    if (!update) {
+                        System.out.println(modNum + "번 명언은 존재하지 않습니다.");
+                    }
+                    break;
+
                 case "삭제":
                     System.out.print("?id=");
                     int delNum = Integer.parseInt(sc.readLine());
@@ -58,7 +86,7 @@ public class Main {
                         System.out.println(quoteRead.getQuoteNum() + " / " + quoteRead.getWriter() + " / " + quoteRead.getQuote());
                     }
                     break;
-                    
+
                 case "종료":
                     return;
 
