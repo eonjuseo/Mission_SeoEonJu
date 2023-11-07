@@ -30,80 +30,100 @@ public class Main {
             String command = sc.readLine();
 
             // 등록 목록 수정 삭제 종료
+
             switch (command) {
                 case "등록":
-                    System.out.print("명언 : ");
-                    String quote = sc.readLine();
-                    System.out.print("작가 : ");
-                    String writer = sc.readLine();
-                    Quote quoteCreate = new Quote(quoteNum, quote, writer);
-                    quoteList.add(0, quoteCreate);
-                    quoteNum++;
-                    System.out.println(quoteNum - 1 + "번 명언이 등록되었습니다.");
-                    break;
-
-                case "삭제":
-                    System.out.print("?id=");
-                    int delNum = Integer.parseInt(sc.readLine());
-                    boolean delete = false;
-                    for (int i = 0; i < quoteList.size(); i++) {
-                        if (quoteList.get(i).getQuoteNum() == delNum) {
-                            quoteList.remove(i);
-                            delete = true;
-                            System.out.println(delNum + "번 명언이 삭제되었습니다.");
-                            break;
-                        }
-                    }
-                    if (!delete) {
-                        System.out.println(delNum + "번 명언은 존재하지 않습니다.");
-                    }
-                    break;
-
-                case "수정":
-                    System.out.print("?id=");
-                    int modNum = Integer.parseInt(sc.readLine());
-                    boolean update = false;
-                    for (int i = 0; i < quoteList.size(); i++) {
-                        if (quoteList.get(i).getQuoteNum() == modNum) {
-                            System.out.println("명언(기존) : " + quoteList.get(i).getQuote());
-                            System.out.print("명언 : ");
-                            String newQuote = sc.readLine();
-                            if (!newQuote.isEmpty()) {
-                                quoteList.get(i).setQuote(newQuote);
-                            }
-                            System.out.println("작가(기존) : " + quoteList.get(i).getWriter());
-                            System.out.print("작가 : ");
-                            String newWriter = sc.readLine();
-                            if (!newWriter.isEmpty()) {
-                                quoteList.get(i).setWriter(newWriter);
-                            }
-                            update = true;
-                            System.out.println(modNum + "번 명언이 수정되었습니다.");
-                            break;
-                        }
-                    }
-                    if (!update) {
-                        System.out.println(modNum + "번 명언은 존재하지 않습니다.");
-                    }
+                    createQuote(sc);
                     break;
 
                 case "목록":
-                    System.out.println("번호 / 작가 / 명언");
-                    System.out.println("----------------------");
-                    for (Quote quoteRead : quoteList) {
-                        System.out.println(quoteRead.getQuoteNum() + " / " + quoteRead.getWriter() + " / " + quoteRead.getQuote());
-                    }
+                    readQuotes();
+                    break;
+
+                case "수정":
+                    updateQuote(sc);
+                    break;
+
+                case "삭제":
+                    deleteQuote(sc);
                     break;
 
                 case "빌드":
                     saveData();
                     System.out.println("data.json 파일의 내용이 갱신되었습니다.");
+                    break;
 
                 case "종료":
                     saveData();
                     return;
-
             }
+        }
+    }
+
+    private static void createQuote(BufferedReader sc) throws IOException {
+        System.out.print("명언 : ");
+        String quote = sc.readLine();
+        System.out.print("작가 : ");
+        String writer = sc.readLine();
+        //LocalDateTime now = LocalDateTime.now();
+        Quote quoteCreate = new Quote(quoteNum, quote, writer);
+        //Quote quoteCreate = new Quote(quoteNum, quote, writer, now, now);
+        quoteList.add(0, quoteCreate);
+        quoteNum++;
+        System.out.println(quoteNum - 1 + "번 명언이 등록되었습니다.");
+    }
+    private static void readQuotes() {
+        System.out.println("번호 / 작가 / 명언");
+        System.out.println("----------------------");
+        for (Quote quoteRead : quoteList) {
+            System.out.println(quoteRead.getQuoteNum() + " / " + quoteRead.getWriter() + " / " + quoteRead.getQuote());
+        }
+    }
+    private static void updateQuote(BufferedReader sc) throws IOException {
+        System.out.print("?id=");
+        int modNum = Integer.parseInt(sc.readLine());
+        boolean update = false;
+        //LocalDateTime updateDate = LocalDateTime.now();
+        for (int i = 0; i < quoteList.size(); i++) {
+            if (quoteList.get(i).getQuoteNum() == modNum) {
+                System.out.println("명언(기존) : " + quoteList.get(i).getQuote());
+                System.out.print("명언 : ");
+                String newQuote = sc.readLine();
+                if (!newQuote.isEmpty()) {
+                    quoteList.get(i).setQuote(newQuote);
+                }
+
+                System.out.println("작가(기존) : " + quoteList.get(i).getWriter());
+                System.out.print("작가 : ");
+                String newWriter = sc.readLine();
+                if (!newWriter.isEmpty()) {
+                    quoteList.get(i).setWriter(newWriter);
+                }
+                // quoteList.get(i).setUpdatedDate(updateDate);
+                update = true;
+                System.out.println(modNum + "번 명언이 수정되었습니다.");
+                break;
+            }
+        }
+        if (!update) {
+            System.out.println(modNum + "번 명언은 존재하지 않습니다.");
+        }
+    }
+
+    private static void deleteQuote(BufferedReader sc) throws IOException {
+        System.out.print("?id=");
+        int delNum = Integer.parseInt(sc.readLine());
+        boolean delete = false;
+        for (int i = 0; i < quoteList.size(); i++) {
+            if (quoteList.get(i).getQuoteNum() == delNum) {
+                quoteList.remove(i);
+                delete = true;
+                System.out.println(delNum + "번 명언이 삭제되었습니다.");
+                break;
+            }
+        }
+        if (!delete) {
+            System.out.println(delNum + "번 명언은 존재하지 않습니다.");
         }
     }
 
